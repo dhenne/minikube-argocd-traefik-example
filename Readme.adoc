@@ -9,4 +9,35 @@ helm repo update
 helm install traefik traefik/traefik
 
 kubectl port-forward $(kubectl get pods --selector "app.kubernetes.io/name=traefik" --output=name) 9000:9000
+
+
+https://argoproj.github.io/argo-helm
+----
+
+install argocd
+[source,bash]
+----
+helm repo add argo-cd https://argoproj.github.io/argo-helm
+helm repo update
+helm dep update charts/argo-cd/
+
+----
+
+port forward & password
+[source,bash]
+----
+kubectl port-forward service/argo-cd-argocd-server -n default 8080:443 & 
+kubectl -n default get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
+----
+
+create self managed deployment of argocd
+[source,bash]
+----
+kubectl apply -f apps/templates/argo-cd.yaml
+----
+
+unmanage
+[source,bash]
+----
+kubectl delete secret -l owner=helm,name=argo-cd  
 ----
