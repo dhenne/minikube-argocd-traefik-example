@@ -1,7 +1,8 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: root
+  name: traefik
+  namespace: default
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
@@ -10,9 +11,13 @@ spec:
     namespace: default
   project: default
   source:
-    path: charts/root
-    repoURL: https://github.com/dhenne/minikube-argocd-traefik-example
-    targetRevision: HEAD
+    chart: traefik
+#     helm:
+#       values: |
+#         pushgateway:
+#           enabled: false
+    repoURL: https://helm.traefik.io/traefik
+    targetRevision: 10.15.0
   syncPolicy:
     automated:
       prune: true
