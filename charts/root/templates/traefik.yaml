@@ -12,10 +12,10 @@ spec:
   project: default
   source:
     chart: traefik
-#     helm:
-#       values: |
-#         pushgateway:
-#           enabled: false
+    helm:
+      values: |
+        service:
+          type: NodePort
     repoURL: https://helm.traefik.io/traefik
     targetRevision: 10.15.0
   syncPolicy:
