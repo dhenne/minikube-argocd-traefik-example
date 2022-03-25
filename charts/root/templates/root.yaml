@@ -11,7 +11,7 @@ spec:
   project: default
   source:
     path: charts/root
-    repoURL: https://github.com/dhenne/minikube-argocd-traefik-example
+    repoURL: https://github.com/dhenne/minikube-argocd-traefik-example.git
     targetRevision: HEAD
   syncPolicy:
     automated:
