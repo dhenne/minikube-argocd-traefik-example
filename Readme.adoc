@@ -1,4 +1,4 @@
-# qickstart minikube
+# quickstart minikube
 
 .Requirements:
 * minikube
@@ -45,3 +45,4 @@ kubectl delete secret -l owner=helm,name=argo-cd
 ----
 kubectl port-forward $(kubectl get pods --selector "app.kubernetes.io/name=traefik" --output=name) 9000:9000
 ----
+
