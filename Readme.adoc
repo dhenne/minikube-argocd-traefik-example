@@ -1,11 +1,10 @@
 # qickstart minikube
 
-Requirements:
- * minikube
- * helm
- * kubectl
- * git
-
+.Requirements:
+* minikube
+* helm
+* kubectl
+* git
 
 [source,bash]
 ----
