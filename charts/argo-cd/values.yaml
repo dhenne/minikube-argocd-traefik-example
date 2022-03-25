@@ -2,3 +2,12 @@
 #   server:
 #     extraArgs:
 #       - --insecure
+argo-cd:
+  repoServer:
+    env:
+      - name: SSL_CERT_DIR
+        value: "/app/config/tls/"
+  server:
+    env:
+      - name: SSL_CERT_DIR
+        value: "/app/config/tls/"
