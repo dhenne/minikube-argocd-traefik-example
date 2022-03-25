@@ -6,13 +6,14 @@
 * kubectl
 * git
 
+.setup local directory and minikube
 [source,bash]
 ----
 git clone https://github.com/dhenne/minikube-argocd-traefik-example
 minikube start --driver=docker --cpus=8 --cni=cilium
 ----
 
-install argocd
+.install argocd
 [source,bash]
 ----
 helm repo add argo-cd https://argoproj.github.io/argo-helm
@@ -21,24 +22,26 @@ helm repo update
 helm install argo-cd charts/argo-cd
 ----
 
-port forward & password
+.port forward & password
 [source,bash]
 ----
 kubectl port-forward service/argo-cd-argocd-server -n default 8080:443 & 
 kubectl -n default get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
 ----
 
-install root app
+.install root app
 [source,bash]
 ----
 kubectl apply -f charts/root/templates/root.yaml
 ----
 
-unmanage
+.unmanage bootstrap helm installation
 [source,bash]
 ----
 kubectl delete secret -l owner=helm,name=argo-cd  
 ----
 
-
+.traefik dashboard
+----
 kubectl port-forward $(kubectl get pods --selector "app.kubernetes.io/name=traefik" --output=name) 9000:9000
+----
