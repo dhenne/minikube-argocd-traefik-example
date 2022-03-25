@@ -29,6 +29,12 @@ kubectl port-forward service/argo-cd-argocd-server -n default 8080:443 &
 kubectl -n default get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
 ----
 
+install root app
+[source,bash]
+----
+kubectl apply -f charts/root/templates/root.yaml
+----
+
 unmanage
 [source,bash]
 ----
