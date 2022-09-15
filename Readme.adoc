@@ -1,4 +1,4 @@
-# quickstart minikube
+= quickstart minikube
 
 .Requirements:
 * minikube

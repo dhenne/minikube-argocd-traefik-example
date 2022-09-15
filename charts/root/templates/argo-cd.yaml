@@ -12,8 +12,18 @@ spec:
   project: default
   source:
     path: charts/argo-cd
-    repoURL: https://github.com/dhenne/minikube-argocd-traefik-example
-    targetRevision: HEAD
+    repoURL: https://argoproj.github.io/argo-helm
+    targetRevision: 5.4.3
+    helm:
+      values: |
+        repoServer:
+          env:
+            - name: SSL_CERT_DIR
+              value: "/app/config/tls/"
+        server:
+          env:
+            - name: SSL_CERT_DIR
+              value: "/app/config/tls/"
   syncPolicy:
     automated:
       prune: true
