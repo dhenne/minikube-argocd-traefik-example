@@ -11,7 +11,7 @@ spec:
     namespace: default
   project: default
   source:
-    path: charts/argo-cd
+    chart: argo-cd
     repoURL: https://argoproj.github.io/argo-helm
     targetRevision: 5.4.3
     helm:
