@@ -11,13 +11,13 @@ spec:
     namespace: default
   project: default
   source:
+    repoURL: https://helm.traefik.io/traefik
     chart: traefik
+    targetRevision: 10.15.0
     helm:
       values: |
         service:
           type: NodePort
-    repoURL: https://helm.traefik.io/traefik
-    targetRevision: 10.15.0
   syncPolicy:
     automated:
       prune: true
