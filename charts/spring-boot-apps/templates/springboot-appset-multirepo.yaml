@@ -15,12 +15,16 @@ spec:
     spec:
       project: default
       source:
-        helm:
-          values: |-
-            {{`{{values}}`}}
         repoURL: https://dhenne.github.io/helm-charts/
         chart: spring-boot-helm-demo
         targetRevision: 0.1.6
+        helm:
+          values: |-
+            {{`{{values}}`}}
       destination:
         server: https://kubernetes.default.svc
         namespace: default
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true

@@ -5,14 +5,14 @@ metadata:
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
-  destination:
-    server: https://kubernetes.default.svc
-    namespace: default
   project: default
   source:
     repoURL: https://dhenne.github.io/helm-charts/
     chart: spring-boot-helm-demo
     targetRevision: 0.1.6
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
   syncPolicy:
     automated:
       prune: true
