@@ -8,7 +8,7 @@ spec:
         repoURL: https://github.com/dhenne/spring-boot-service
         revision: HEAD
         directories:
-          - path: ".argo-helm/*"
+          - path: "helm/*"
   template:
     metadata:
       name: '{{`{{path[0]}}`}}'
