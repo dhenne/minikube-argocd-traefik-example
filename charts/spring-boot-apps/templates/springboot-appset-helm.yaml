@@ -11,7 +11,7 @@ spec:
           - path: ".argo-helm/*"
   template:
     metadata:
-      name: '{{`{{path.basename}}`}}'
+      name: '{{`{{path[0]}}`}}'
     spec:
       project: default
       source:
