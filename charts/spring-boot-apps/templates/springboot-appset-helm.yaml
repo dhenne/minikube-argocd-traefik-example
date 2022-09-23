@@ -11,13 +11,16 @@ spec:
           - path: .argo-helm/*
   template:
     metadata:
-      name: '{{`{{path[0]}}`}}'
+      name: '{{`{{path.basename}}`}}'
     spec:
       project: default
       source:
         repoURL: https://github.com/dhenne/spring-boot-service
         targetRevision: HEAD
         path: '{{`{{path}}`}}'
+        helm:
+          valueFiles:
+            - values.yaml
       destination:
         server: https://kubernetes.default.svc
         namespace: default
