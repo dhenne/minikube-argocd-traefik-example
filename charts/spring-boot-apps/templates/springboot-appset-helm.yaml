@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: springboot-appset-helm
+spec:
+  generators:
+    - git:
+        repoURL: https://github.com/dhenne/spring-boot-service
+        revision: HEAD
+        directories:
+          - path: .argo-helm/*
+  template:
+    metadata:
+      name: '{{path[0]}}'
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/dhenne/spring-boot-service
+        targetRevision: HEAD
+        path: '{{path}}'
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: default
