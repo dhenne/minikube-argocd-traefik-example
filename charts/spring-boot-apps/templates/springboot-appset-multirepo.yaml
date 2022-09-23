@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: example
+spec:
+  generators:
+    - git:
+        repoURL: https://github.com/dhenne/spring-boot-service
+        revision: HEAD
+        files:
+          - path: ".argo-multirepo/**.yaml"
+  template:
+    metadata:
+      name: '{{`{{name}}`}}'
+    spec:
+      project: default
+      source:
+        helm:
+          values: |-
+            {{`{{values}}`}}
+        repoURL: https://dhenne.github.io/helm-charts/
+        chart: spring-boot-helm-demo
+        targetRevision: 0.1.6
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: default
