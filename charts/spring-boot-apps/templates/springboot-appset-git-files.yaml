@@ -17,7 +17,7 @@ spec:
       source:
         repoURL: https://dhenne.github.io/helm-charts/
         chart: spring-boot-helm-demo
-        targetRevision: 0.1.6
+        targetRevision: 0.2.1
         helm:
           values: |-
             {{`{{values}}`}}
