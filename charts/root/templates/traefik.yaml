@@ -23,7 +23,8 @@ spec:
             publishedService:
               enabled: true
         additionalArguments:
-          - --providers.kubernetesingress.ingressendpoint.hostname=spring-boot-helm-test.192.168.49.2.nip.io
+          # - --providers.kubernetesingress.ingressendpoint.hostname=spring-boot-helm-test.192.168.49.2.nip.io
+          - --providers.kubernetesingress.ingressendpoint.ip=192.168.49.2
   syncPolicy:
     automated:
       prune: true
