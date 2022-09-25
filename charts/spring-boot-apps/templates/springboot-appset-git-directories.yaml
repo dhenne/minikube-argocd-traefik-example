@@ -18,9 +18,6 @@ spec:
         repoURL: https://github.com/dhenne/spring-boot-service
         path: '{{`{{path}}`}}'
         targetRevision: HEAD
-        helm:
-          valueFiles:
-            - values.yaml
       destination:
         server: https://kubernetes.default.svc
         namespace: default
