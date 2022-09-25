@@ -1,26 +1,26 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: springboot-appset-multirepo
+  name: springboot-appset-git-directories
 spec:
   generators:
     - git:
         repoURL: https://github.com/dhenne/spring-boot-service
         revision: HEAD
-        files:
-          - path: ".argo-multirepo/**.yaml"
+        directories:
+          - path: "helm/*"
   template:
     metadata:
-      name: '{{`{{name}}`}}'
+      name: '{{`{{path.basename}}`}}'
     spec:
       project: default
       source:
-        repoURL: https://dhenne.github.io/helm-charts/
-        chart: spring-boot-helm-demo
-        targetRevision: 0.1.6
+        repoURL: https://github.com/dhenne/spring-boot-service
+        path: '{{`{{path}}`}}'
+        targetRevision: HEAD
         helm:
-          values: |-
-            {{`{{values}}`}}
+          valueFiles:
+            - values.yaml
       destination:
         server: https://kubernetes.default.svc
         namespace: default
