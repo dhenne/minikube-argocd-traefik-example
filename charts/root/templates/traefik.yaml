@@ -22,6 +22,8 @@ spec:
           kubernetesIngress:
             publishedService:
               enabled: true
+        additionalArguments:
+          - --providers.kubernetesingress.ingressendpoint.hostname=spring-boot-helm-test.192.168.49.2.nip.io
   syncPolicy:
     automated:
       prune: true
