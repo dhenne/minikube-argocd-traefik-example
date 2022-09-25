@@ -10,7 +10,7 @@
 [source,bash]
 ----
 git clone https://github.com/dhenne/minikube-argocd-traefik-example
-minikube start --driver=docker --cpus=8 --cni=cilium
+minikube start --driver=docker
 ----
 
 .install argocd
@@ -18,8 +18,8 @@ minikube start --driver=docker --cpus=8 --cni=cilium
 ----
 helm repo add argo-cd https://argoproj.github.io/argo-helm
 helm repo update
-# helm dep update charts/argo-cd/
-helm install argo-cd charts/argo-cd
+(cd charts/bootstrap-argo-cd ; helm dependency update)
+helm install argo-cd charts/bootstrap-argo-cd
 ----
 
 .port forward & password
