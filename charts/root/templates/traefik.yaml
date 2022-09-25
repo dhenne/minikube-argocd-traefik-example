@@ -20,10 +20,8 @@ spec:
           type: NodePort
         providers:
           kubernetesIngress:
-            ingressEndpoint:
-              # only works for service type loadbalancer dynamically
-              # see also: https://github.com/traefik/traefik/issues/7972
-              ip: 192.168.49.2
+            publishedService:
+              enabled: true
   syncPolicy:
     automated:
       prune: true
