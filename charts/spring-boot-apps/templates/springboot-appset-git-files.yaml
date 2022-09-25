@@ -8,7 +8,7 @@ spec:
         repoURL: https://github.com/dhenne/spring-boot-service
         revision: HEAD
         files:
-          - path: ".argo-multirepo/**.yaml"
+          - path: ".argo-multisource-files/**.yaml"
   template:
     metadata:
       name: '{{`{{name}}`}}'
