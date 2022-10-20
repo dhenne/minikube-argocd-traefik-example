@@ -13,7 +13,7 @@ spec:
   source:
     repoURL: https://helm.traefik.io/traefik
     chart: traefik
-    targetRevision: 10.24.3
+    targetRevision: 16.2.0
     helm:
       values: |
         service:
