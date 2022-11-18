@@ -15,6 +15,7 @@ jobs:
       - name: run argocd on minikube
         run: |
           minikube start --driver=docker
+          helm dependency update charts/bootstrap-argo-cd
           helm install argo-cd charts/bootstrap-argo-cd
           kubectl rollout status --watch deployment argo-cd-argocd-server
           argocd login cd.argoproj.io --core
