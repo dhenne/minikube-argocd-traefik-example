@@ -22,7 +22,7 @@ jobs:
           kubectl apply -f charts/root/templates/root.yaml
           for application_name in root spring-boot-apps springboot-helm-prod ; do
             argocd app sync $application_name
-            argocd app wait $application_name
+            argocd app wait --operation $application_name
           done
           kubectl port-forward service/springboot-helm-prod-spring-boot-helm-demo -n default 3000:80 &
       - name: test application response
