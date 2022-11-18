@@ -1,0 +1,29 @@
+name: Test
+
+on: push
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: run argocd on minikube
+        run: |
+          minikube start --driver=docker
+          helm install argo-cd charts/bootstrap-argo-cd
+          kubectl rollout status --watch deployment argo-cd-argocd-server
+          argocd login cd.argoproj.io --core
+          kubectl apply -f charts/root/templates/root.yaml
+          for application_name in root spring-boot-apps springboot-helm-prod ; do
+            argocd app sync $application_name
+            argocd app wait $application_name
+          done
+          kubectl port-forward service/springboot-helm-prod-spring-boot-helm-demo -n default 3000:80 &
+          curl --retry-connrefused \
+            --connect-timeout 5 \
+            --max-time 10 \
+            --retry 5 \
+            --retry-delay 0 \
+            --retry-max-time 30 \
+            --fail http://localhost:3000/ | \
+            grep -q "Hello Application"
