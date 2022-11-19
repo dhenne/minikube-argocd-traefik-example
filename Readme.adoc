@@ -1,5 +1,7 @@
 = quickstart minikube
 
+image:https://github.com/dhenne/minikube-argocd-traefik-example/actions/workflows/test.yaml/badge.svg)[link="https://github.com/dhenne/minikube-argocd-traefik-example/actions/workflows/test.yaml", title="Test"]
+
 .Requirements:
 * minikube
 * helm
