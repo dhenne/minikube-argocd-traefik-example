@@ -1,12 +1,15 @@
 name: Test
 
-on: push
+on:
+  push:
+    branches:
+      - master
 
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: install argocd cli
         run: |
           curl -sSL -o argocd-linux-amd64 https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
@@ -20,7 +23,7 @@ jobs:
           kubectl rollout status --watch deployment argo-cd-argocd-server
           argocd login cd.argoproj.io --core
           kubectl apply -f charts/root/templates/root.yaml
-          for application_name in root spring-boot-apps springboot-helm-prod ; do
+          for application_name in root argo-cd spring-boot-apps springboot-helm-prod ; do
             argocd app sync $application_name
             argocd app wait --operation --sync --health $application_name
           done
