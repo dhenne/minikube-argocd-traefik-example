@@ -11,6 +11,8 @@ spec:
           tokenRef:
             secretName: github-token
             key: token
+          labels:
+            - '^[^renovate].*$'
         requeueAfterSeconds: 120
 
   template:
