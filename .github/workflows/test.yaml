@@ -24,8 +24,8 @@ jobs:
           argocd login cd.argoproj.io --core
           kubectl apply -f charts/root/templates/root.yaml
           for application_name in root argo-cd spring-boot-apps springboot-helm-prod ; do
-            argocd app sync $application_name
-            argocd app wait --operation --sync --health $application_name
+            argocd app sync $application_name || echo syncing $application_name failed
+            argocd app wait --operation --sync --health $application_name || echo waiting for $application_name failed
           done
           kubectl port-forward service/springboot-helm-prod-spring-boot-helm-demo -n default 3000:80 &
       - name: test application response

@@ -1,0 +1,35 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: springboot-appset-mr
+spec:
+  generators:
+    - pullRequest:
+        github:
+          owner: dhenne
+          repo: spring-boot-service
+          tokenRef:
+            secretName: github-token
+            key: token
+        requeueAfterSeconds: 120
+
+  template:
+    metadata:
+      name: 'springboot-{{`{{branch_slug}}`}}-{{`{{number}}`}}'
+    spec:
+      source:
+        repoURL: https://github.com/dhenne/spring-boot-service
+        targetRevision: '{{`{{head_sha}}`}}'
+        path: deployment/helm/springboot-helm-test
+        helm:
+          parameters:
+            - name: 'spring-boot-helm-demo.image.tag'
+              value: '{{`{{head_short_sha}}`}}'
+      project: default
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: default
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
