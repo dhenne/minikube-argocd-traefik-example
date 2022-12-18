@@ -18,6 +18,15 @@ jobs:
       - name: run argocd on minikube
         run: |
           minikube start --driver=docker
+          kubectl apply -f - <<EOF
+          apiVersion: v1
+          kind: Secret
+          metadata:
+            name: github-token
+          type: Opaque
+          stringData:
+            token: ${{ secrets.GITHUB_TOKEN }}
+          EOF
           helm dependency update charts/bootstrap-argo-cd
           helm install argo-cd charts/bootstrap-argo-cd
           kubectl rollout status --watch deployment argo-cd-argocd-server
