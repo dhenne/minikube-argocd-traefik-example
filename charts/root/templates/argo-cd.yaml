@@ -13,7 +13,7 @@ spec:
   source:
     repoURL: https://argoproj.github.io/argo-helm
     chart: argo-cd
-    targetRevision: 5.16.7
+    targetRevision: 7.6.10
     helm:
       values: |
         repoServer:
